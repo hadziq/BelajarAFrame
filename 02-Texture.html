@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pengantar</title>
+    <script src="https://aframe.io/releases/1.0.4/aframe.min.js"></script>
+</head>
+<body>
+    <a-scene>
+        <a-asset>
+            <img src="texture/Brick/basecolor.jpg" id="base">
+            <img src="texture/Brick/normal.jpg" id="normal">
+            <img src="texture/Brick/height.png" id="height">
+        </a-asset>
+        <a-box 
+            src="#base"
+            repeat="2 2"
+            normal-map="#normal"
+            normal-texture-repeat="2 2"
+            segments-height="100"
+            segments-width="100"
+            segments-depth="100"
+            displacement-map="#height"
+            displacement-bias=0
+            displacement-scale=0.1
+            displacement-texture-repeat="2 2"
+            position="-1 1.5 -2" 
+        ></a-box>
+        <a-sphere
+            src="#base"
+            repeat="2 2"
+            normal-map="#normal"
+            normal-texture-repeat="2 2"
+            position="1 1.5 -2"
+            radius="0.5"
+        ></a-sphere>
+    </a-scene>
+</body>
+</html>
