@@ -14,10 +14,20 @@
             },
             init: function() {
                 let data = this.data;   // isinya adalah schema yang kita punya
-                this.geometri = new THREE.BoxGeometry(data.ukuran, data.ukuran, data.ukuran, 5, 5, 5);
+                
                 this.bahan = new THREE.MeshStandardMaterial({color:0xffff00, wireframe:true});
-                this.objek3D = new THREE.Mesh(this.geometri, this.bahan);
-                this.el.setObject3D("mesh", this.objek3D);
+                
+                this.geometri1 = new THREE.BoxGeometry(data.ukuran, data.ukuran, data.ukuran, 5, 5, 5);
+                this.kotak3D = new THREE.Mesh(this.geometri1, this.bahan);
+                
+                this.geometri2 = new THREE.TorusBufferGeometry(1.5, 0.2, 45, 45);
+                this.torus3D = new THREE.Mesh(this.geometri2, this.bahan);
+                
+                this.group = new THREE.Group();
+                this.group.add(this.kotak3D);
+                this.group.add(this.torus3D)
+
+                this.el.setObject3D("mesh", this.group);
             }
         });
     </script>
