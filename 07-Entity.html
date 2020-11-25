@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Entitas (Entity-Component-System)</title>
+    <script src="https://aframe.io/releases/1.0.4/aframe.min.js"></script>
+</head>
+<body>
+    <a-scene>
+        <!-- box -->
+        <a-box id="box1" color="#ff0000" position="0 1.5 -3" material="color: #55aa00" geometry="" rotation="0 0 0"></a-box>
+        <!-- box via entity (with geometry and material components) -->
+        <a-entity
+            geometry="primitive:box;"
+            material="color:#55aa00;"
+            position="2 1.5 -3"
+        ></a-entity>
+        <!-- light via entity (with light component) -->
+        <a-entity
+            light="type:point;color:#ff0000"
+            position="-2 1.5 -3"
+        ></a-entity>
+    </a-scene>
+</body>
+</html>
