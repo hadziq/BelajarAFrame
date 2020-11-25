@@ -16,18 +16,25 @@
         AFRAME.registerComponent('foo',{
             // Schema adalah tempat oper-operan data dari/ke komponen (parameter)
             // Schema bisa single (seperti position) bisa multiple (seperti material)
+            // schema: {
+            //     type:"string", default:"Entity"
+            // },
+            // init:function() {
+            //     console.log("Hello " + this.data);
+            // }
             schema: {
-                type:"string", default:"Entity"
+                message1: {type:"string", default:"Some"},
+                message2: {type:"string", default:"Entity"}
             },
             init:function() {
-                console.log("Hello " + this.data);
+                console.log(this.data.message1 + " " + this.data.message2);
             }
         });
     </script>
     <a-scene>
         <a-entity foo></a-entity>
         <a-box
-            foo="Box"
+            foo="message1:New;message2:Box"
             id="box1"
             material="color:red"
             position="0 1.5 -3"
