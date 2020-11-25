@@ -8,6 +8,7 @@
     <script src="https://aframe.io/releases/1.0.4/aframe.min.js"></script>
     <script src="https://cdn.jsdelivr.net/gh/donmccurdy/aframe-extras@v6.1.1/dist/aframe-extras.min.js"></script>
     <script src="https://unpkg.com/aframe-event-set-component@4.2.1/dist/aframe-event-set-component.min.js"></script>
+    <script src="https://unpkg.com/aframe-proxy-event-component/dist/aframe-proxy-event-component.min.js"></script>
 </head>
 <body>
     <a-scene>
@@ -19,11 +20,10 @@
             text__btn_up="align:center;baseline:top;value:UP;wrapCount:5;"
             position="-2 2.5 -3"
             material="color:green"
-            event-set__atas="
-            _event:click;
-            _target:#box;
-            animation.property:position;
-            animation.to:1 2.5 -3;
+            proxy-event__satu="
+                event:click;
+                as:atas;
+                to:#box;
             "
         ></a-entity>
         <a-entity
@@ -35,15 +35,18 @@
                 geometry="primitive:triangle"
                 material="color:green"
                 rotation="0 0 180"
-                event-set__bawah="
-                _event:click;
-                _target:#box;
-                animation.property:position;
-                animation.to:1 0.5 -3;
+                proxy-event__satu="
+                    event:click;
+                    as:bawah;
+                    to:#box;
                 "
             ></a-entity>
         </a-entity>
-        <a-box id="box" color="#aaaa00" position="1 1.5 -3"></a-box>
+        <a-box id="box" color="#aaaa00" position="1 1.5 -3"
+            animation__atas="property:position;to:1 2.5 -3;startEvents:atas"
+            animation__bawah="property:position;to:1 0.5 -3;startEvents:bawah"
+            animation__reset="property:position;to:1 1.5 -3;startEvents:click"
+        ></a-box>
     </a-scene>
 </body>
 </html>
