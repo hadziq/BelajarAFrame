@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kursor</title>
+    <script src="https://aframe.io/releases/1.0.4/aframe.min.js"></script>
+</head>
+<body>
+    <a-scene>
+        <a-camera>
+            <a-entity
+                raycaster="objects:.clickable"
+                cursor="fuse:true;fuseTimeout:2000"
+                geometry="primitive:box;width:0.2;height:0.2;depth:0.2;"
+                material="color:#ff0000;"
+                position="0 0 -2"
+                animation__fusing="property:scale;
+                from:1 1 1;
+                dur:2000;
+                to:0.1 0.1 0.1;
+                startEvents:fusing;
+                "
+                animation__mouseleave="property:scale;
+                to:1 1 1;
+                startEvents:mouseleave;"
+            ></a-entity>
+        </a-camera>
+        <a-box id="box1" color="#0055aa" position="-2 1.5 -3"
+            animation__rotation="property:rotation;
+            from:0 0 0;
+            to:0 360 0;
+            startEvents:click;"
+        ></a-box>
+        <a-box id="box2" color="#55aa00" position="0 1.5 -3"
+            animation__rotation="property:rotation;
+            from:0 0 0;
+            to:0 360 0;
+            startEvents:click;"
+            class="clickable"
+        ></a-box>
+        <a-box id="box3" color="#5500aa" position="2 1.5 -3"
+            animation__rotation="property:rotation;
+            from:0 0 0;
+            to:0 360 0;
+            startEvents:click;"
+        ></a-box>
+    </a-scene>
+</body>
+</html>
