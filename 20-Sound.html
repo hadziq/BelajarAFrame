@@ -8,6 +8,25 @@
     <script src="https://cdn.jsdelivr.net/gh/donmccurdy/aframe-extras@v6.1.1/dist/aframe-extras.min.js"></script>
 </head>
 <body>
+    <script>
+        AFRAME.registerComponent('soundcontroller', {
+            init:function() {
+                let el = this.el;
+                el.addEventListener('click', function(ev) {
+                    let id = ev.srcElement.id;
+                    console.log(`%c${id}`,"font-size:2em;");
+                    let speaker = document.querySelector("#speaker");
+                    if (id == "play") {
+                        speaker.components.sound.playSound();
+                    } else if (id == "pause") {
+                        speaker.components.sound.pauseSound();
+                    } else {
+                        speaker.components.sound.stopSound();
+                    }
+                });
+            }
+        });
+    </script>
     <a-scene>
         <a-camera>
             <a-cursor raycaster="objects:a-box"></a-cursor>
@@ -22,11 +41,12 @@
             rotation="0 150 0"
             position="0 0 -3"
         ></a-gltf-model>
-        <a-box color="#F00" position="0 1.5 -3"
-            sound="src:audios/Calimba.mp3;autoplay:true"
-            animation="property:position;from:0 1.5 -3;to:0 1.5 -15;duration:5;
-            dir:alternate;loop:true;"
+        <a-box id="speaker" color="#F00" position="0 1.5 -3"
+            sound="src:audios/Cartoon.wav;autoplay:false;"
         ></a-box>
+        <a-box soundcontroller id="play" color="#500" position="0 1 -2" scale="0.5 0.5 0.5"></a-box>
+        <a-box soundcontroller id="pause" color="#550" position="1.5 1 -2" scale="0.5 0.5 0.5"></a-box>
+        <a-box soundcontroller id="stop" color="#050" position="-1.5 1 -2" scale="0.5 0.5 0.5"></a-box>
     </a-scene>
 </body>
 </html>
