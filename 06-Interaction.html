@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Inspector</title>
+    <script src="https://aframe.io/releases/1.0.4/aframe.min.js"></script>
+    <script src="https://unpkg.com/aframe-event-set-component@4.2.1/dist/aframe-event-set-component.min.js"></script>
+</head>
+<body>
+    <a-scene>
+        <a-camera>
+            <a-cursor></a-cursor>
+        </a-camera>
+        <a-box
+            position="-2 1.5 -3"
+            color="green"
+            animation__scale="property:scale;to:0.5 1.5 0.5;dur:2000;loop:true;
+                startEvents:click;
+                pauseEvents:mouseleave;
+                resumeEvents:mouseenter;
+            "
+        ></a-box>
+        <a-box
+            position="0 1.5 -3"
+            color="red"
+            event-set__mouseleave="_event:mouseleave;color:#00aa00;rotation:0 45 45;"
+            event-set__mouseenter="_event:mouseenter;color:red;rotation:0 0 0;"
+            event-set__click="_event:click;color:#aa00aa;rotation:45 0 45;_target:#kotakkuning;"
+        ></a-box>
+        <a-box
+            position="2 1.5 -3"
+            color="yellow"
+            id="kotakkuning"
+        ></a-box>
+    </a-scene>
+</body>
+</html>
