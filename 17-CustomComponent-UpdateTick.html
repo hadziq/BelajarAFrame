@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mengembangkan A-Frame</title>
+    <!-- A-Frame dikembangkan di atas Three.js -->
+    <!-- berbasis entity-component framework,
+    semua di bawah scene adalah entity,
+    setiap entity punya satu atau lebih component(s) -->
+    <script src="https://aframe.io/releases/1.0.4/aframe.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/donmccurdy/aframe-extras@v6.1.1/dist/aframe-extras.min.js"></script>
+</head>
+<body>
+    <script>
+        AFRAME.registerComponent('foo',{
+            schema: {
+                message1: {type:"string", default:"Some"},
+                message2: {type:"string", default:"Entity"}
+            },
+            // update tidak akan terpanggil jika oldData == newData
+            update:function(oldData) {
+                console.log("UPDATED");
+            },
+            // tick akan dipanggil di setiap kali frame di-render
+            tick:function(/*time, timeDelta*/){
+                this.el.getObject3D('mesh').rotation.y += 0.01;
+            },
+            init:function() {
+                let data = this.data;
+                let el = this.el;
+                this.el.getObject3D('mesh').material.color = new THREE.Color('yellow');
+                this.el.addEventListener('click', function(ev) {
+                    console.log(data.message1 + " " + data.message2 + " was clicked");
+                    ev.srcElement.setAttribute('foo','message1:Updated')
+                    // atribut di bawah ini tidak ada kaitan dengan update,
+                    //  karena mereka tidak ada di dalam schema
+                    /*
+                    let clickedData = ev.srcElement.getAttribute('position');
+                    ev.srcElement.setAttribute('position', clickedData.x + ' ' + y1 + ' -3');
+                    */
+                });
+            }
+        });
+    </script>
+    <a-scene>
+        <a-camera><a-cursor></a-cursor></a-camera>
+        <a-box
+            foo
+            id="box1"
+            material="color:red"
+            position="-2 1.5 -3"
+        ></a-box>
+        <a-box
+            foo="message1:New;message2:Box"
+            id="box1"
+            material="color:green"
+            position="2 1.5 -3"
+        ></a-box>
+    </a-scene>
+</body>
+</html>
