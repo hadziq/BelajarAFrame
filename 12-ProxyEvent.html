@@ -9,6 +9,8 @@
     <script src="https://cdn.jsdelivr.net/gh/donmccurdy/aframe-extras@v6.1.1/dist/aframe-extras.min.js"></script>
     <script src="https://unpkg.com/aframe-event-set-component@4.2.1/dist/aframe-event-set-component.min.js"></script>
     <script src="https://unpkg.com/aframe-proxy-event-component/dist/aframe-proxy-event-component.min.js"></script>
+    <!-- Agar komponen yang kita punya menghadap ke komponen yang lain secara kontinyu -->
+    <script src="https://unpkg.com/aframe-look-at-component@0.8.0/dist/aframe-look-at-component.min.js"></script>
 </head>
 <body>
     <a-scene>
@@ -20,6 +22,7 @@
             text__btn_up="align:center;baseline:top;value:UP;wrapCount:5;"
             position="-2 2.5 -3"
             material="color:green"
+            look-at="#cam"
             proxy-event__satu="
                 event:click;
                 as:atas;
