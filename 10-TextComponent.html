@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Komponen Teks</title>
+    <script src="https://aframe.io/releases/1.0.4/aframe.min.js"></script>
+</head>
+<body>
+    <a-scene>
+        <!-- Teks tiga dimensi, warna default putih -->
+        <!-- <a-text
+            value="Lorem ipsum"
+            color="#00ffff"
+            position="0 1.5 -2"
+        ></a-text> -->
+        <!-- Bila menggunakan a-entity maka akan terlihat lebih kecil karena wrapCount -->
+        <a-entity
+            text="
+            value:Bila menggunakan a-entity\nmaka akan terlihat lebih kecil karena wrapCount;
+            color:#0000ff;
+            wrapCount:11;
+            font:./fonts/Raleway-Semibold-msdf.json;
+            align:center;
+            negate:false"
+            position="0 1.5 -2"
+            geometry="primitive:plane;width:auto;height:auto"
+            material="color:#cccccc"
+        ></a-entity>
+    </a-scene>
+</body>
+</html>
