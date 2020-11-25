@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Suara</title>
+    <script src="https://aframe.io/releases/1.0.4/aframe.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/donmccurdy/aframe-extras@v6.1.1/dist/aframe-extras.min.js"></script>
+</head>
+<body>
+    <a-scene>
+        <a-camera>
+            <a-cursor raycaster="objects:a-box"></a-cursor>
+        </a-camera>
+        <!-- <a-sound src="audios/Calimba.mp3" autoplay="true"></a-sound> -->
+        <a-sky color="lightblue"></a-sky>
+        <a-ocean width="100" depth="100" density="40"></a-ocean>
+        <a-gltf-model
+            src="models/Island.gltf"
+            gltf-model="models/Island.gltf"
+            scale="0.1 0.1 0.1"
+            rotation="0 150 0"
+            position="0 0 -3"
+        ></a-gltf-model>
+        <a-box color="#F00" position="0 1.5 -3"
+            sound="src:audios/Calimba.mp3;autoplay:true"
+            animation="property:position;from:0 1.5 -3;to:0 1.5 -15;duration:5;
+            dir:alternate;loop:true;"
+        ></a-box>
+    </a-scene>
+</body>
+</html>
