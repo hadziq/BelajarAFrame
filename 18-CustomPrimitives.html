@@ -12,6 +12,15 @@
             schema: {
                 ukuran: {type: "number", default:1}
             },
+            tick: function() {
+                this.torus3D.rotation.y += 0.1;
+            },
+            update: function(old) {
+                // Seluruh kode yang ada di init perlu diatur lagi di sini
+            },
+            remove: function() {
+                this.el.removeObject3D("mesh");
+            },
             init: function() {
                 let data = this.data;   // isinya adalah schema yang kita punya
                 
