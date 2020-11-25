@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>3D Model (glb/glTF)</title>
+    <script src="https://aframe.io/releases/1.0.4/aframe.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/donmccurdy/aframe-extras@v6.1.1/dist/aframe-extras.min.js"></script>
+</head>
+<body>
+    <a-scene>
+        <a-asset>
+            <a-asset-item id="laptop" src="models/Notebook.gltf"></a-asset-item>
+        </a-asset>
+        <a-entity
+            gltf-model="#laptop"
+            position="-5 0 -5"
+            rotation="0 180 0"
+            animation-mixer="clip:ArmatureAction;"
+        ></a-entity>
+        <a-gltf-model src="models/Notebook.gltf"
+            position="0 0 -5"
+            rotation="0 90 0"
+            animation-mixer
+        ></a-gltf-model>
+        <a-entity
+            gltf-model="models/Notebook.gltf"
+            position="5 0 -5"
+            animation-mixer="clip:ArmatureAction;loop:pingpong;"
+        ></a-entity>
+    </a-scene>
+</body>
+</html>
