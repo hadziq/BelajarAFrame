@@ -8,13 +8,26 @@
     <script src="https://cdn.jsdelivr.net/gh/donmccurdy/aframe-extras@v6.1.1/dist/aframe-extras.min.js"></script>
 </head>
 <body>
+    <script>
+        AFRAME.registerComponent("navlog",{
+            init:function() {
+                this.el.addEventListener('navigation-start', function() {
+                    console.log("%cStart","font-size:2em;color:green");
+                });
+                this.el.addEventListener('navigation-end', function() {
+                    console.log("%cEnd","font-size:2em;color:red");
+                });
+            }
+        });
+    </script>
     <a-scene>
         <a-grid></a-grid>
         <!-- rig inilah yang akan menjadi lokomotif kita -->
         <a-entity 
+            navlog
             id="rig"
             movement-controls="controls:checkpoint"
-            checkpoint-controls="mode:animate;">
+            checkpoint-controls="mode:animate;animateSpeed:5">
             <a-camera>
                 <a-cursor></a-cursor>
             </a-camera>
