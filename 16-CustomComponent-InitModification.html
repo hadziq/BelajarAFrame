@@ -26,8 +26,13 @@
                 // Karena this tidak terdeteksi di dalam event listener
                 let data = this.data;
                 let el = this.el;
-                this.el.addEventListener('click', function() {
+                this.el.addEventListener('click', function(ev) {
                     console.log(data.message1 + " " + data.message2 + " was clicked");
+                    ev.srcElement.setAttribute('foo','message1:Alternative');
+                    let clickedData = ev.srcElement.getAttribute('position');
+                    console.log(clickedData);
+                    let y1 = clickedData.y + 0.5;
+                    ev.srcElement.setAttribute('position', clickedData.x + ' ' + y1 + ' -3')
                 });
             }
         });
@@ -44,7 +49,7 @@
             foo="message1:New;message2:Box"
             id="box1"
             material="color:green"
-            position="0 1.5 -3"
+            position="2 1.5 -3"
         ></a-box>
     </a-scene>
 </body>
