@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Proxy Event</title>
+    <script src="https://aframe.io/releases/1.0.4/aframe.min.js"></script>
+</head>
+<body>
+    <a-scene>
+        <a-camera id="cam">
+            <a-cursor></a-cursor>
+        </a-camera>
+        <a-entity
+            geometry="primitive:triangle"
+            text__btn_up="align:center;baseline:top;value:UP;wrapCount:5;"
+            position="-2 2.5 -3"
+            material="color:green"
+        ></a-entity>
+        <a-entity
+            text__btn_down="align:center;baseline:bottom;value:DOWN;wrapCount:10;"
+            position="-2 1 -3"
+        >
+        <!-- Agar yang berputar hanya segitiganya, teks tidak perlu -->
+            <a-entity
+                geometry="primitive:triangle"
+                material="color:green"
+                rotation="0 0 180"
+            ></a-entity>
+        </a-entity>
+        <a-box id="box" color="#aaaa00" position="1 1.5 -3"></a-box>
+    </a-scene>
+</body>
+</html>
