@@ -4,7 +4,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Proxy Event</title>
+    <!-- Agar animasi yang awalnya disematkan di pengontrol, bisa dipindah ke yang dikontrol -->
     <script src="https://aframe.io/releases/1.0.4/aframe.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/donmccurdy/aframe-extras@v6.1.1/dist/aframe-extras.min.js"></script>
+    <script src="https://unpkg.com/aframe-event-set-component@4.2.1/dist/aframe-event-set-component.min.js"></script>
 </head>
 <body>
     <a-scene>
@@ -16,6 +19,12 @@
             text__btn_up="align:center;baseline:top;value:UP;wrapCount:5;"
             position="-2 2.5 -3"
             material="color:green"
+            event-set__atas="
+            _event:click;
+            _target:#box;
+            animation.property:position;
+            animation.to:1 2.5 -3;
+            "
         ></a-entity>
         <a-entity
             text__btn_down="align:center;baseline:bottom;value:DOWN;wrapCount:10;"
@@ -26,6 +35,12 @@
                 geometry="primitive:triangle"
                 material="color:green"
                 rotation="0 0 180"
+                event-set__bawah="
+                _event:click;
+                _target:#box;
+                animation.property:position;
+                animation.to:1 0.5 -3;
+                "
             ></a-entity>
         </a-entity>
         <a-box id="box" color="#aaaa00" position="1 1.5 -3"></a-box>
