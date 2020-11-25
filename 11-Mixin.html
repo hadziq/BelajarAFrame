@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mixin (seperti CSS)</title>
+    <script src="https://aframe.io/releases/1.0.4/aframe.min.js"></script>
+</head>
+<body>
+    <a-scene>
+        <a-assets>
+            <!-- Mixin tidak terbatas pada komponen visual tapi juga mencakup komponen perilaku -->
+            <a-mixin
+                id="kotakmerah"
+                geometry="primitive:box;"
+                material="color:#ff0000;"
+            ></a-mixin>
+            <a-mixin
+                id="berputar"
+                animation="property:rotation;
+                dur:2000;
+                to:0 360 0;
+                loop:true;
+                startEvents:click;"
+            ></a-mixin>
+            <a-mixin
+                id="hijau"
+                material="color:#00ff00"
+            ></a-mixin>
+        </a-assets>
+        <a-camera><a-cursor></a-cursor></a-camera>
+        <!-- Perilaku yang paling kanan yang berlaku -->
+        <a-entity
+            position="0 1.5 -3"
+            mixin="hijau kotakmerah"
+        ></a-entity>
+        <a-entity
+            position="2 1.5 -3"
+            mixin="kotakmerah hijau berputar"
+        ></a-entity>
+        <a-entity
+            position="-2 1.5 -3"
+            mixin="berputar hijau kotakmerah"
+            material="color:#aaaa00"
+        ></a-entity>
+    </a-scene>
+</body>
+</html>
