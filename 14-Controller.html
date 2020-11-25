@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kendali</title>
+    <!-- Baik yang 3-DoF: Oculus Go; maupun yang 6-DoF: Oculus Quest -->
+    <!-- Untuk mengakomodasi beragam kendali: Laser, Hands, Super-hands -->
+    <script src="https://aframe.io/releases/1.0.4/aframe.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/donmccurdy/aframe-extras@v6.1.1/dist/aframe-extras.min.js"></script>
+    <script src="https://unpkg.com/super-hands@3.0.0/dist/super-hands.min.js"></script>
+</head>
+<body>
+    <a-scene>
+        <!-- Baru terlihat setelah kita aktifkan mode VR -->
+        <a-entity laser-controls="hand:right;color:red;"></a-entity>
+        <!-- <a-entity 
+        sphere-collider="objects:a-box;"
+        super-hands hand-controls="hand:right;color:red;"></a-entity> -->
+        <a-box
+            grabbable
+            id="box"
+            scale="0.5 0.5 0.5"
+            color="blue"
+            position="0 1.5 -1"
+            animation="property:rotation;from:0 0 0;to: 360 360 0;startEvents:click;"
+        ></a-box>
+    </a-scene>
+</body>
+</html>
