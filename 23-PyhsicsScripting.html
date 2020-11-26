@@ -15,9 +15,15 @@
                 el.addEventListener("click", function() {
                     let positionObject = el.getAttribute("position");
                     let positionVector = new THREE.Vector3(positionObject.x, positionObject.y, positionObject.z);
+                    
+                    let camPosObject = document.querySelector("#cam").getAttribute("position");
+                    let camPosVector = new THREE.Vector3(camPosObject.x, camPosObject.y, camPosObject.z);
+                    
+                    // Besaran direction dipengaruhi oleh jarak kamera ke object
+                    let direction = camPosVector.sub(positionVector);
                     // Fungsi di bawah ini ada di Cannon.js
                     el.body.applyImpulse(
-                        new CANNON.Vec3(0, 0, -3),  // ke arah z- (menjauh dari kamera)
+                        new CANNON.Vec3(-1 * direction.x, 0, -1 * direction.z),  // ke arah z- (menjauh dari kamera)
                         new CANNON.Vec3().copy(positionVector)
                     );
                 });
@@ -25,7 +31,7 @@
         });
     </script>
     <a-scene physics="debug:true">
-        <a-camera>
+        <a-camera id="cam">
             <a-cursor></a-cursor>
         </a-camera>
         <a-box
