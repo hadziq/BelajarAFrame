@@ -21,9 +21,12 @@
                     
                     // Besaran direction dipengaruhi oleh jarak kamera ke object
                     let direction = camPosVector.sub(positionVector);
+                    direction = direction.normalize();  // Jadi vektor unit
+                    let speed = -10;
+                    direction = direction.multiplyScalar(speed);
                     // Fungsi di bawah ini ada di Cannon.js
                     el.body.applyImpulse(
-                        new CANNON.Vec3(-1 * direction.x, 0, -1 * direction.z),  // ke arah z- (menjauh dari kamera)
+                        new CANNON.Vec3(direction.x, 0, direction.z),  // ke arah z- (menjauh dari kamera)
                         new CANNON.Vec3().copy(positionVector)
                     );
                 });
@@ -43,8 +46,9 @@
             depth="0.2"
             position="0 0 -5"
         ></a-box>
-        <a-sphere pushableobject radius="0.2" color="red" shadow dynamic-body position="0 1.5 -3"></a-sphere>
-        <a-sphere pushableobject radius="0.2" color="green" shadow dynamic-body position="2 1.5 -5"></a-sphere>
-        <a-sphere pushableobject radius="0.2" color="blue" shadow dynamic-body position="-2 1.5 -5"></a-sphere>
+        <!-- Massa dynamic-body by default adalah 5 -->
+        <a-sphere pushableobject radius="0.2" color="red" shadow dynamic-body="mass:5;" position="0 1.5 -3"></a-sphere>
+        <a-sphere pushableobject radius="0.2" color="green" shadow dynamic-body="mass:50;" position="2 1.5 -5"></a-sphere>
+        <a-sphere pushableobject radius="0.2" color="blue" shadow dynamic-body="mass:500;" position="-2 1.5 -5"></a-sphere>
 </body>
 </html>
