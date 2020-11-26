@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simulasi Fisika</title>
+    <script src="https://aframe.io/releases/1.0.4/aframe.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/n5ro/aframe-physics-system@v4.0.1/dist/aframe-physics-system.min.js"></script>
+</head>
+<body>
+    <script>
+        AFRAME.registerComponent('boxgenerator', {
+            init:function() {
+                let el = this.el;
+                el.addEventListener('click', function() {
+                    let scene = document.querySelector("#scene");
+                    let newBox = document.createElement("a-box");
+                    newBox.setAttribute("scale", "0.2 0.2 0.2");
+                    newBox.setAttribute("color", "red");
+                    let temp = Math.random() * 2 - 1;
+                    newBox.setAttribute("position", `${temp} 2 -3`);
+                    newBox.setAttribute("dynamic-body", "shape:box");
+                    scene.appendChild(newBox);
+                });
+            }
+        });
+    </script>
+    <a-scene id="scene" physics="debug:true">
+        <a-camera><a-cursor></a-cursor></a-camera>
+        <a-plane static-body color="#222" rotation="-90 0 0" scale="15 15 15"></a-plane>
+        <a-box boxgenerator color="#F00" position="0 1.5 -1" scale="0.2 0.2 0.2"></a-box>
+        <a-box dynamic-body="shape:sphere" color="#F00" position="0.2 3 -1" scale="0.2 0.2 0.2"></a-box>
+    </a-scene>
+</body>
+</html>
