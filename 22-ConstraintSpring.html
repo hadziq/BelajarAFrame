@@ -20,7 +20,7 @@
                     let temp = Math.random() * 2 - 1;
                     newBox.setAttribute("position", `${temp} 7 -3`);
                     newBox.setAttribute("dynamic-body", "shape:box");
-                    newBox.setAttribute("spring", "target:#anchor");
+                    newBox.setAttribute("spring", "target:#anchor;stiffness:25");
                     scene.appendChild(newBox);
                 });
             }
