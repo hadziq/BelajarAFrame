@@ -21,7 +21,16 @@
         });
     </script>
     <a-scene embedded arjs="source:webcam;">
-        <a-camera locationfinder gps-camera="simulateLatitude:-6.176770;simulateLongitude:106.826241" rotation-reader></a-camera>
+        <!-- <a-camera locationfinder gps-camera="simulateLatitude:-6.176770;simulateLongitude:106.826241"
+        rotation-reader> -->
+        <a-camera gps-camera="simulateLatitude:-6.176770;simulateLongitude:106.826241"
+        rotation-reader>
+        </a-camera>
+        <a-text value="This place" scale="15 15 15"
+            look-at="[gps-camera]"
+            align="center"
+            gps-entity-place="latitude:-6.175553;longitude:106.827118"
+        ></a-text>
     </a-scene>
 </body>
 </html>
