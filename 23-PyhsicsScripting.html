@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Skripting Fisika</title>
+    <script src="https://aframe.io/releases/1.0.4/aframe.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/n5ro/aframe-physics-system@v4.0.1/dist/aframe-physics-system.min.js"></script>
+</head>
+<body>
+    <script>
+        AFRAME.registerComponent("pushableobject", {
+            init:function() {
+                let el = this.el;
+                el.addEventListener("click", function() {
+                    let positionObject = el.getAttribute("position");
+                    let positionVector = new THREE.Vector3(positionObject.x, positionObject.y, positionObject.z);
+                    // Fungsi di bawah ini ada di Cannon.js
+                    el.body.applyImpulse(
+                        new CANNON.Vec3(0, 0, -3),  // ke arah z- (menjauh dari kamera)
+                        new CANNON.Vec3().copy(positionVector)
+                    );
+                });
+            }
+        });
+    </script>
+    <a-scene physics="debug:true">
+        <a-camera>
+            <a-cursor></a-cursor>
+        </a-camera>
+        <a-box
+            shadow rotation="-90 0 0"
+            color="#888"
+            static-body
+            width="10"
+            height="10"
+            depth="0.2"
+            position="0 0 -5"
+        ></a-box>
+        <a-sphere pushableobject radius="0.2" color="red" shadow dynamic-body position="0 1.5 -3"></a-sphere>
+        <a-sphere pushableobject radius="0.2" color="green" shadow dynamic-body position="2 1.5 -5"></a-sphere>
+        <a-sphere pushableobject radius="0.2" color="blue" shadow dynamic-body position="-2 1.5 -5"></a-sphere>
+</body>
+</html>
