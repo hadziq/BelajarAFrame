@@ -12,6 +12,9 @@
         AFRAME.registerComponent("pushableobject", {
             init:function() {
                 let el = this.el;
+                el.addEventListener("collide", function(ev) {
+                    console.log("%c" + ev.srcElement.id, "font-size:2em");
+                });
                 el.addEventListener("click", function() {
                     let positionObject = el.getAttribute("position");
                     let positionVector = new THREE.Vector3(positionObject.x, positionObject.y, positionObject.z);
@@ -47,8 +50,8 @@
             position="0 0 -5"
         ></a-box>
         <!-- Massa dynamic-body by default adalah 5 -->
-        <a-sphere pushableobject radius="0.2" color="red" shadow dynamic-body="mass:5;" position="0 1.5 -3"></a-sphere>
-        <a-sphere pushableobject radius="0.2" color="green" shadow dynamic-body="mass:50;" position="2 1.5 -5"></a-sphere>
-        <a-sphere pushableobject radius="0.2" color="blue" shadow dynamic-body="mass:500;" position="-2 1.5 -5"></a-sphere>
+        <a-sphere id="merah" pushableobject radius="0.2" color="red" shadow dynamic-body="mass:5;" position="0 1.5 -3"></a-sphere>
+        <a-sphere id="hijau" pushableobject radius="0.2" color="green" shadow dynamic-body="mass:50;" position="2 1.5 -5"></a-sphere>
+        <a-sphere id="biru" pushableobject radius="0.2" color="blue" shadow dynamic-body="mass:500;" position="-2 1.5 -5"></a-sphere>
 </body>
 </html>
