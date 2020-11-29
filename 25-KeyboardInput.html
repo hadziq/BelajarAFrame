@@ -10,26 +10,36 @@
 </head>
 <body>
     <script>
-        document.addEventListener('keydown', function(e) {
-            console.log("%c" + e.key, "font-size:2em");
-            let bola = document.querySelector("#red");
-            let impulse = new CANNON.Vec3(0, 0, 0);
-            let speed = 5;
-            if (e.key == "w") {
-                impulse.z -= speed;
+        AFRAME.registerComponent('keyboard-input', {
+            init:function() {
+                let el = this.el;
+                el.addEventListener("body-loaded", function(){
+                    document.addEventListener('keydown', function(e) {
+                        console.log("%c" + e.key, "font-size:2em");
+                        let bola = document.querySelector("#red");
+                        let impulse = new CANNON.Vec3(0, 0, 0);
+                        let speed = 5;
+                        if (e.key == "w") {
+                            impulse.z -= speed;
+                        }
+                        if (e.key == "a") {
+                            impulse.x -= speed;
+                        }
+                        if (e.key == "s") {
+                            impulse.z += speed;
+                        }
+                        if (e.key == "d") {
+                            impulse.x += speed;
+                        }
+                        if (e.code == "Space") {
+                            impulse.y += speed;
+                        }
+                        bola.body.applyImpulse(impulse, new CANNON.Vec3(0, 0, 0)); 
+                        //bola.body.applyForce(impulse, new CANNON.Vec3(0, 0, 0));
+                    });
+                });
             }
-            if (e.key == "a") {
-                impulse.x -= speed;
-            }
-            if (e.key == "s") {
-                impulse.z += speed;
-            }
-            if (e.key == "d") {
-                impulse.x += speed;
-            }
-            bola.body.applyImpulse(impulse, new CANNON.Vec3(0, 0, 0)); 
-            //bola.body.applyForce(impulse, new CANNON.Vec3(0, 0, 0));
-        });
+        })
     </script>
     <a-scene physics="debug:true;">
         <!-- a-camera secara default memiliki kontrol WASD, 
@@ -48,6 +58,7 @@
             position="0 0 -5"
         ></a-box>
         <a-sphere
+            keyboard-input
             id="red"
             radius="0.2"
             color="red"
