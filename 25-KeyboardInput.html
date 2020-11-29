@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Keyboard Input</title>
+    <!-- Agar animasi yang awalnya disematkan di pengontrol, bisa dipindah ke yang dikontrol -->
+    <script src="https://aframe.io/releases/1.0.4/aframe.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/n5ro/aframe-physics-system@v4.0.1/dist/aframe-physics-system.min.js"></script>
+</head>
+<body>
+    <script>
+        document.addEventListener('keydown', function(e) {
+            console.log("%c" + e.key, "font-size:2em");
+            let bola = document.querySelector("#red");
+            let impulse = new CANNON.Vec3(0, 0, 0);
+            let speed = 5;
+            if (e.key == "w") {
+                impulse.z -= speed;
+            }
+            if (e.key == "a") {
+                impulse.x -= speed;
+            }
+            if (e.key == "s") {
+                impulse.z += speed;
+            }
+            if (e.key == "d") {
+                impulse.x += speed;
+            }
+            bola.body.applyImpulse(impulse, new CANNON.Vec3(0, 0, 0)); 
+            //bola.body.applyForce(impulse, new CANNON.Vec3(0, 0, 0));
+        });
+    </script>
+    <a-scene physics="debug:true;">
+        <!-- a-camera secara default memiliki kontrol WASD, 
+            maka untuk menghilangkannya kita perlu deklarasi entity sebagai ganti -->
+        <a-entity camera position="0 1.5 0">
+            <a-cursor></a-cursor>
+        </a-entity>
+
+        <a-box
+            shadow rotation="-90 0 0"
+            color="#888"
+            static-body
+            width="10"
+            height="10"
+            depth="0.2"
+            position="0 0 -5"
+        ></a-box>
+        <a-sphere
+            id="red"
+            radius="0.2"
+            color="red"
+            shadow
+            dynamic-body
+            position="0 1.5 -3"
+        ></a-sphere>
+        <a-box
+            id="green"
+            color="green"
+            shadow
+            dynamic-body
+            position="2 1.5 -5"
+        ></a-box>
+        <a-box
+            id="blue"
+            color="blue"
+            shadow
+            dynamic-body
+            position="-2 1.5 -5"
+        ></a-box>
+    </a-scene>
+</body>
+</html>
