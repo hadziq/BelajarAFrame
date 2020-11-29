@@ -19,44 +19,58 @@
     <img id="right" src="images/right.png" class="button" style=" bottom: 20px; left: 220px;">
     <script>
         let direction = new THREE.Vector3();
-
+        let movement = new THREE.Vector3();
+        function touchEndListener() {
+            movement = new THREE.Vector3();
+        }
         function clickListener(ev) {
-            let cam = document.querySelector("#cam");
-            let position = cam.getAttribute("position");
             let sceneEl = document.querySelector("#scene1");
             let camDirection = sceneEl.camera.getWorldDirection(direction);
             camDirection.multiplyScalar(0.4);
             if (ev.srcElement.id == "up") {
                 console.log("%cUP", "font-size:2em;");
-                position.x += camDirection.x;
-                position.z += camDirection.z;
+                movement.x += camDirection.x;
+                movement.z += camDirection.z;
             } else if (ev.srcElement.id == "down"){
                 console.log("%cDOWN", "font-size:2em;");
-                position.x -= camDirection.x;
-                position.z -= camDirection.z;
+                movement.x -= camDirection.x;
+                movement.z -= camDirection.z;
             }
             let sideDirection = camDirection.cross(new THREE.Vector3(0, 1, 0));
             if (ev.srcElement.id == "left") {
                 console.log("%cLEFT", "font-size:2em;");
-                position.x -= sideDirection.x;
-                position.z -= sideDirection.z;
+                movement.x -= sideDirection.x;
+                movement.z -= sideDirection.z;
             } else if (ev.srcElement.id == "right"){
                 console.log("%cRIGHT", "font-size:2em;");
-                position.x += sideDirection.x;
-                position.z += sideDirection.z;
+                movement.x += sideDirection.x;
+                movement.z += sideDirection.z;
             }
-            cam.setAttribute("position", position);
         }
         AFRAME.registerComponent("user-control", {
+            tick:function() {
+                if (movement.length() == 0) {
+                    return;
+                }
+                let cam = document.querySelector("#cam");
+                let position = cam.getAttribute("position");
+                position.x += movement.x;
+                position.z += movement.z;
+                cam.setAttribute("position", position);
+            },
             init:function() {
                 let up = document.querySelector("#up");
                 let down = document.querySelector("#down");
                 let left = document.querySelector("#left");
                 let right = document.querySelector("#right");
-                up.addEventListener("click", clickListener);
-                down.addEventListener("click", clickListener);
-                left.addEventListener("click", clickListener);
-                right.addEventListener("click", clickListener);
+                up.addEventListener("touchstart", clickListener);
+                down.addEventListener("touchstart", clickListener);
+                left.addEventListener("touchstart", clickListener);
+                right.addEventListener("touchstart", clickListener);
+                up.addEventListener("touchend", touchEndListener);
+                down.addEventListener("touchend", touchEndListener);
+                left.addEventListener("touchend", touchEndListener);
+                right.addEventListener("touchend", touchEndListener);
             }
         });
     </script>
